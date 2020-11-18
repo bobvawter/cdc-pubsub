@@ -21,6 +21,7 @@ payloads to a topic.
 * Start the bridge server:
     * `docker run --rm -it -v $HOME/cdc-pubsub:/data:ro -p 13013:13013 bobvawter/cdc-pubsub:latest --projectID my-project-id --sharedKey xyzzy`
 * Create an enterprise changefeed in CockroachDB:
+    * `SET CLUSTER STETING kv.rangefeed.enabled = true;` if you haven't previously enabled rangefeeds for your cluster.
     * `CREATE CHANGEFEED FOR TABLE foo INTO 'experimental-http://127.0.0.1:13013/v1/my-topic?sharedKey=xyzzy' WITH updated;`
     * Replace `my-topic` with your preferred topic name.
 * Check the log for progress.
