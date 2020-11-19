@@ -184,7 +184,12 @@ func (p *Publisher) http(w http.ResponseWriter, req *http.Request) {
 
 	for s.Scan() {
 		var future *pubsub.PublishResult
-		future, err = p.Publish(req.Context(), topic, s.Bytes(), attrs)
+		// Make a copy of the data since s.Scan() may update the
+		// backing array before the Pub/Sub client has actually
+		// sent the message to the API server.
+		data := make([]byte, len(s.Bytes()))
+		copy(data, s.Bytes())
+		future, err = p.Publish(req.Context(), topic, data, attrs)
 		if err != nil {
 			return
 		}
