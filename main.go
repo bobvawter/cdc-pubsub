@@ -33,6 +33,7 @@ func main() {
 	flags := pflag.FlagSet{SortFlags: true}
 	flags.StringVar(&s.BindAddr, "bindAddr", ":13013", "the address to bind to")
 	flags.StringVar(&s.CredentialsFile, "credentials", "cdc-pubsub.json", "a JSON-formatted Google Cloud credentials file")
+	flags.BoolVar(&s.DumpOnly, "dumpOnly", false, "if true, log payloads instead of sending to pub/sub")
 	flags.DurationVar(&s.GracePeriod, "gracePeriod", 30*time.Second, "shutdown grace period")
 	flags.StringVar(&s.ProjectID, "projectID", "", "the Google Cloud project ID")
 	flags.StringSliceVar(&s.SharedKeys, "sharedKey", nil, "require clients to provide one of these secret values")

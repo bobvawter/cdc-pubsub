@@ -34,6 +34,7 @@ import (
 type Server struct {
 	BindAddr        string
 	CredentialsFile string
+	DumpOnly        bool
 	GracePeriod     time.Duration
 	ProjectID       string
 	SharedKeys      []string
@@ -46,9 +47,13 @@ func (s *Server) ListenAndServe(ctx context.Context) error {
 		return errors.New("must specify a project ID")
 	}
 
-	client, err := pubsub.NewClient(ctx, s.ProjectID, option.WithCredentialsFile(s.CredentialsFile))
-	if err != nil {
-		log.Fatal(err)
+	var client *pubsub.Client
+	var err error
+	if !s.DumpOnly {
+		client, err = pubsub.NewClient(ctx, s.ProjectID, option.WithCredentialsFile(s.CredentialsFile))
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	mux := http.NewServeMux()

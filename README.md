@@ -32,6 +32,7 @@ payloads to a topic.
       --bindAddr string        the address to bind to (default ":13013")
       --credentials string     a JSON-formatted Google Cloud credentials file (default
                                "cdc-pubsub.json")
+      --dumpOnly               if true, log payloads instead of sending to pub/sub
       --gracePeriod duration   shutdown grace period (default 30s)
   -h, --help                   display this message
       --projectID string       the Google Cloud project ID
