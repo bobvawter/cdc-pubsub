@@ -183,6 +183,11 @@ func (p *Publisher) http(w http.ResponseWriter, req *http.Request) {
 	var futures []*pubsub.PublishResult
 
 	for s.Scan() {
+		if p.client == nil {
+			log.Print(string(s.Bytes()))
+			continue
+		}
+
 		var future *pubsub.PublishResult
 		// Make a copy of the data since s.Scan() may update the
 		// backing array before the Pub/Sub client has actually
