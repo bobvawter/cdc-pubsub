@@ -1,5 +1,7 @@
 # CockroachDB CDC to Google Pub/Sub Bridge
 
+CockroachDB as of v22.1 [natively supports](https://www.cockroachlabs.com/docs/v22.1/create-changefeed#create-a-changefeed-connected-to-a-google-cloud-pub-sub) sending a changefeed to Google Pub/Sub. This repository is now archived, but will be retained for demonstration purposes.
+
 This application demonstrates an approach to connecting a [CockroachDB
 Enterprise Change Data
 Capture](https://www.cockroachlabs.com/docs/v20.2/stream-data-out-of-cockroachdb-using-changefeeds.html#configure-a-changefeed-enterprise)
